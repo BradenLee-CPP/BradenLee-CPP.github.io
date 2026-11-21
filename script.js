@@ -41,3 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hamburgerButton.addEventListener('click', () => mobileMenu.classList.toggle('active'));
 });
+
+const sections = [...document.querySelectorAll('section')]
+
+let options = {
+    threshold: 0.5
+}
+
+const handleIntersect = (entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            document.body.style.backgroundColor = entry.target.getAttribute('data-color');
+        }
+    })
+}
+
+const observer = new IntersectionObserver(handleIntersect, options)
+
+sections.forEach(section => {
+    observer.observe(section)
+})
